@@ -1,0 +1,35 @@
+ABC Retail Web App
+Welcome to the ABC Retail Web App, a professional retail management system built with ASP.NET Core. This application helps you manage customer profiles, orders, products, and their images stored in Azure Blob Storage, as well as dummy contracts saved in Azure Files. It’s designed to be flexible and works seamlessly with Azure services like Table Storage, Blob Storage, Queue Storage, and File Shares, making it a great tool for retail businesses looking to streamline their operations. Whether you’re adding new products with images or uploading contract documents, this app has you covered with a clean, responsive interface powered by Bootstrap.
+
+Features
+The ABC Retail Web App offers a variety of features to simplify retail management. You can create and manage customer profiles to keep track of your clients, create and manage orders with links to products and customers, and handle product details including uploading and displaying images stored in Azure Blob Storage. The app also lets you upload dummy contract files, which are securely stored in Azure Files, making it easy to organize important documents. With a responsive design thanks to Bootstrap, the app looks great and works well on any device, providing a professional experience for users.
+
+Prerequisites
+Before you can run the ABC Retail Web App, you’ll need a few things set up. First, make sure you have .NET 6.0 or a later version installed, which you can download from the official .NET website. You’ll also need an Azure Storage Account, which includes Table Storage for storing customer, product, and order data, Blob Storage for product images, Queue Storage for processing tasks, and a File Share for contracts. To develop and run the app, use Visual Studio 2022 or Visual Studio Code with the C# extension. Don’t forget to install Git so you can clone the repository and start working on the project.
+
+Installation
+Getting the ABC Retail Web App up and running is straightforward. Start by cloning the repository to your local machine using the command git clone https://github.com/your-username/ABCRetailWebApp.git, then navigate into the project folder with cd ABCRetailWebApp. Next, install all the necessary dependencies by running dotnet restore in your terminal to pull in the required NuGet packages, including Azure.Data.Tables, Azure.Storage.Blobs, Azure.Storage.Queues, and Azure.Storage.Files.Shares. You’ll need to set up an Azure Storage Account and configure it with the right resources: tables for Customers, Products, and Orders, a Blob container named products for images, queues like productqueue and orderqueue, and a File Share called contracts with a dummycontracts directory. Update the appsettings.json file with your Azure Storage connection string like this: {"ConnectionStrings": {"AzureStorageConnectionString": "your-connection-string-here"}}. Finally, build the project with dotnet build and run it using dotnet run, then open your browser to http://localhost:5254 to see the app in action.
+
+Usage
+Using the ABC Retail Web App is simple and intuitive. When you land on the welcome page, you’ll see tiles that let you jump into different tasks. Click "Create Customer Profile" or "Manage Customer Profiles" to handle customer data, "Create Order" or "Manage Orders" to work with orders, and "Create Product" or "Manage Products" to manage products and view their images. There’s also a "Upload Contract" button on the welcome page that takes you to a form where you can upload PDF, DOC, DOCX, or TXT files, which will be stored in the Azure File Share. Each section is designed to be easy to navigate, with clear options to add, edit, or delete items as needed.
+
+Configuration
+To get the app working with your Azure setup, you’ll need to configure a few things. The most important is the Azure Storage connection string, which you’ll add to the appsettings.json file under "ConnectionStrings:AzureStorageConnectionString". This string connects the app to your storage account. You can also tweak the names of the File Share (default is contracts), Blob container (default is products), and queues (default is productqueue and orderqueue) in the controllers if they differ in your setup. Make sure the access settings for Blob Storage and File Shares are correct—either set them to public access or use SAS tokens for security, depending on your needs.
+
+Contributing
+If you’d like to contribute to the ABC Retail Web App, here’s how to get started. First, fork the repository to your own GitHub account. Then, create a new branch for your changes using git checkout -b feature-branch. Make your updates, commit them with a message like git commit -m "Add new feature", and push the branch to your fork with git push origin feature-branch. Finally, open a Pull Request on the original repository so your changes can be reviewed and merged. We welcome any improvements or bug fixes!
+
+License
+This project is licensed under the MIT License, which means you can use, copy, modify, and distribute it as long as you include the original copyright and license notice. If you’d like to use a different license, feel free to create a LICENSE.md file with your preferred terms. Check the LICENSE.md file for more details once it’s added.
+
+Contact
+For questions or support, feel free to reach out. The author is [Your Name or GitHub Username], and you can contact me at [Your Email]. If you run into any issues or have suggestions, please open an issue on the GitHub repository at https://github.com/your-username/ABCRetailWebApp/issues. I’d love to hear your feedback!
+
+Troubleshooting
+If you hit any snags while setting up or using the app, here are some tips. If the app doesn’t start, double-check that your connection string in appsettings.json is correct and that all Azure resources are properly created. For images not loading on the Manage Products page, verify the ImageUrl in the Products table is a valid Blob Storage URL and that the container has the right access settings. If contract uploads fail, ensure the contracts file share exists and is accessible. You can also check the Output window in Visual Studio for error logs to pinpoint the problem.
+
+Development Tips
+For developers looking to extend the app, here are some handy tips. Use the ILogger interface to add custom logging for debugging, and consider adding unit tests with xUnit or NUnit to ensure code reliability. You can enhance the UI by customizing the site.css file or adding more Bootstrap components. If you need to add new Azure features, explore the Azure SDK documentation for additional services like Cosmos DB or Event Hubs. Keep your Git branches organized and use pull requests to collaborate effectively.
+
+Additional Notes
+This app was last updated on August 28, 2025, and is continuously evolving. Feel free to explore the code, experiment with new features, and share your ideas. The project is hosted on GitHub, so you can track changes and contribute at any time. Happy coding!
