@@ -1,0 +1,22 @@
+﻿@model CustomerProfile
+
+@{
+    ViewData["Title"] = "Delete Profile";
+}
+
+<h2>Delete Profile</h2>
+<p>Are you sure you want to delete the following profile?</p>
+<ul>
+    <li>Name: @Model.Name</li>
+    <li>Email: @Model.Email</li>
+    <li>Registered: @Model.RegistrationDate.ToString("g")</li>
+    <li>Address: @Model.Address</li>
+    <li>Phone: @Model.Phone</li>
+</ul>
+
+<form asp-action="DeleteProfile" method="post">
+    <input type="hidden" asp-for="PartitionKey" />
+    <input type="hidden" asp-for="RowKey" />
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a href="@Url.Action("ManageCustomerProfiles", "Home")" class="btn btn-secondary ml-2">Cancel</a>
+</form>

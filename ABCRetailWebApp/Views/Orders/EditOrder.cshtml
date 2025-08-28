@@ -1,0 +1,65 @@
+﻿@model ABCRetailWebApp.Models.Orders
+@{
+    ViewData["Title"] = "Edit Order";
+}
+
+<div class="container mt-4">
+    <h2 class="text-primary">Edit Order</h2>
+
+    <form asp-action="EditOrder" method="post">
+        <input type="hidden" asp-for="PartitionKey" />
+        <input type="hidden" asp-for="RowKey" />
+        <input type="hidden" asp-for="OrderDate" />
+        <input type="hidden" asp-for="CustomerId" />
+        <input type="hidden" asp-for="ProductId" />
+        <input type="hidden" asp-for="ETag" />
+
+        <div class="form-group">
+            <label asp-for="CustomerId" class="control-label">Customer ID</label>
+            <input asp-for="CustomerId" class="form-control" readonly />
+            <span asp-validation-for="CustomerId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ProductId" class="control-label">Product ID</label>
+            <input asp-for="ProductId" class="form-control" readonly />
+            <span asp-validation-for="ProductId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Price" class="control-label">Price</label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="TrackingId" class="control-label">Tracking ID</label>
+            <input asp-for="TrackingId" class="form-control" />
+            <span asp-validation-for="TrackingId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Status" class="control-label">Status</label>
+            <input asp-for="Status" class="form-control" />
+            <span asp-validation-for="Status" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a asp-action="ManageOrders" class="btn btn-secondary">Back to Manage Orders</a>
+    </form>
+</div>
+
+@section Styles {
+    <style>
+        .form-group {
+            max-width: 500px;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            margin-right: 10px;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+}

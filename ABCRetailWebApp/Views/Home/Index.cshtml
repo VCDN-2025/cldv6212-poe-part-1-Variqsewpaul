@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "ABC Retail Web App";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="header">
+        <h1>ABC Retail Web App</h1>
+        <p>Welcome to our professional retail management system</p>
+    </div>
+    <div class="tile-container">
+        <div class="tile create-customer">
+            <a href="@Url.Action("CreateCustomerProfile", "Home")">Create Customer Profile</a>
+        </div>
+        <div class="tile manage-customers">
+            <a href="@Url.Action("ManageCustomerProfiles", "Home")">Manage Customer Profiles</a>
+        </div>
+        <div class="tile create-order">
+            <a href="@Url.Action("Create", "Orders")">Create Order</a>
+        </div>
+        <div class="tile create-product">
+            <a href="@Url.Action("Create", "Products")">Create Product</a>
+        </div>
+        <div class="tile manage-orders">
+            <a href="@Url.Action("ManageOrders", "Orders")">Manage Orders</a>
+        </div>
+        <div class="tile manage-products">
+            <a href="@Url.Action("ManageProducts", "Products")">Manage Products</a>
+        </div>
+    </div>
+    <a href="@Url.Action("Upload", "Contracts")" class="btn btn-primary mt-4">Upload Contract</a>
+</body>
+</html>

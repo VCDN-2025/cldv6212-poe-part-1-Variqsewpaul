@@ -1,0 +1,44 @@
+﻿@model ABCRetailWebApp.Models.ContractUploadViewModel
+@{
+    ViewData["Title"] = "Upload Contract";
+}
+
+<div class="container mt-4">
+    <h2 class="text-primary">Upload Dummy Contract</h2>
+    <p class="text-muted">Upload a dummy contract file to be stored in Azure Files.</p>
+
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <div class="alert alert-success" role="alert">
+            @ViewBag.Message
+        </div>
+    }
+
+    <form asp-action="Upload" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="File" class="control-label">Select Contract File</label>
+            <input asp-for="File" type="file" class="form-control-file" accept=".pdf,.doc,.docx,.txt" />
+            <span asp-validation-for="File" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+        <a asp-action="Index" asp-controller="Home" class="btn btn-secondary">Back to Home</a>
+    </form>
+</div>
+
+@section Styles {
+    <style>
+        .form-group {
+            max-width: 500px;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            margin-right: 10px;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+}

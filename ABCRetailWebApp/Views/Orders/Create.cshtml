@@ -1,0 +1,57 @@
+﻿@model Orders
+@{
+    ViewData["Title"] = "Create Order";
+}
+
+<h2>Create Order</h2>
+<form asp-action="CreateOrder" method="post">
+    <div class="form-group">
+        <label asp-for="RowKey" class="control-label">OrderId</label>
+        <input asp-for="RowKey" class="form-control" readonly value="@Model.RowKey" />
+        <span asp-validation-for="RowKey" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CustomerId" class="control-label">Customer</label>
+        <select asp-for="CustomerId" class="form-control" required>
+            <option value="">Select a Customer</option>
+            @foreach (var customer in ViewBag.Customers)
+            {
+                <option value="@customer.RowKey">@customer.Name (ID: @customer.RowKey)</option>
+            }
+        </select>
+        <span asp-validation-for="CustomerId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ProductId" class="control-label">Product</label>
+        <select asp-for="ProductId" class="form-control" required onchange="fetchProductPrice(this)">
+            <option value="">Select a Product</option>
+            @foreach (var product in ViewBag.Products ?? new List<Products>())
+            {
+                <option value="@product.RowKey" data-price="@product.Price">@product.Name (ID: @product.RowKey, Price: @product.Price)</option>
+            }
+        </select>
+        <span asp-validation-for="ProductId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Price" class="control-label">Price</label>
+        <input asp-for="Price" class="form-control" readonly />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create Order</button>
+    <a asp-action="Index" class="btn btn-secondary">Back to Orders</a>
+</form>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        function fetchProductPrice(select) {
+            var price = $(select).find(':selected').data('price');
+            $('#Price').val(price || 0.01); // Default to 0.01 to satisfy [Range] validation
+        }
+        $(document).ready(function () {
+            $('#ProductId').trigger('change'); // Set initial price
+        });
+    </script>
+}

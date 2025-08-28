@@ -1,0 +1,49 @@
+﻿@model List<Orders>
+
+@{
+    ViewData["Title"] = "Manage Orders";
+}
+
+<h2>Manage Orders</h2>
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>OrderId</th>
+                <th>CustomerId</th>
+                <th>ProductId</th>
+                <th>Price</th>
+                <th>TrackingId</th>
+                <th>OrderDate</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.RowKey</td>
+                    <td>@order.PartitionKey</td>
+                    <td>@order.ProductId</td>
+                    <td>@order.Price</td>
+                    <td>@order.TrackingId</td>
+                    <td>@order.OrderDate.ToString("g")</td>
+                    <td>@order.Status</td>
+                    <td>
+                        <a asp-action="EditOrder" asp-route-id="@order.RowKey" class="btn btn-primary btn-sm">Edit</a>
+                        <form asp-action="DeleteOrder" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@order.RowKey" />
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this order?');">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No orders found.</p>
+}

@@ -1,0 +1,46 @@
+﻿@model List<CustomerProfile>
+
+@{
+    ViewData["Title"] = "Manage Customer Profiles";
+}
+
+<h2>Customer Profiles</h2>
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Registered</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var profile in Model)
+            {
+                <tr>
+                    <td>@profile.Name</td>
+                    <td>@profile.Email</td>
+                    <td>@profile.RegistrationDate.ToString("g")</td>
+                    <td>@profile.Address</td>
+                    <td>@profile.Phone</td>
+                    <td>
+                        <a href="@Url.Action("EditProfile", "Home", new { rowKey = profile.RowKey, partitionKey = profile.PartitionKey })" class="btn btn-sm btn-info">Edit</a>
+                        <form asp-action="ConfirmDeleteProfile" method="post" style="display:inline;">
+                            <input type="hidden" name="partitionKey" value="@profile.PartitionKey" />
+                            <input type="hidden" name="rowKey" value="@profile.RowKey" />
+                            <button type="submit" class="btn btn-sm btn-danger ml-2" onclick="return confirm('Are you sure you want to delete this profile?');">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No customer profiles found.</p>
+}

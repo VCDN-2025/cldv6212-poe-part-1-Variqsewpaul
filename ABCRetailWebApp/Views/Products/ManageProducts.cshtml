@@ -1,0 +1,159 @@
+﻿@model List<Products>
+
+@{
+    ViewData["Title"] = "Manage Products";
+}
+
+<div class="container mt-4">
+    <div class="header mb-4">
+        <h2 class="text-primary">Manage Products</h2>
+        <p class="text-muted">Efficiently view and manage your product catalog.</p>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-hover shadow-sm">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th>Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model)
+                    {
+                        <tr>
+                            <td>@product.RowKey</td>
+                            <td>@product.Name</td>
+                            <td>@product.Price.ToString()</td>
+                            <td>@(string.IsNullOrEmpty(product.Description) ? "N/A" : product.Description)</td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(product.ImageUrl))
+                                {
+                                    <div class="image-container">
+                                        <img src="@product.ImageUrl" alt="@product.Name" class="product-image img-fluid"
+                                             onload="console.log('Image loaded: @product.ImageUrl')"
+                                             onerror="console.log('Image failed to load: @product.ImageUrl, Error: ', this.error); this.src='https://via.placeholder.com/300?text=No+Image'; this.onerror=null;">
+                                        <div class="overlay" onclick="zoomImage(this)">
+                                            <span>Click to Zoom</span>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <span>No Image</span>
+                                }
+                            </td>
+                            <td>
+                                <a asp-action="EditProduct" asp-route-id="@product.RowKey" class="btn btn-primary btn-sm">Edit</a>
+                                <form asp-action="DeleteProduct" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete @product.Name?');">
+                                    <input type="hidden" name="id" value="@product.RowKey" />
+                                    <button type="submit" class="btn btn-danger btn-sm ml-2">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p class="text-center text-warning">No products found.</p>
+    }
+</div>
+
+@section Styles {
+    <style>
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .table {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .image-container {
+            position: relative;
+            display: inline-block;
+            max-width: 300px;
+        }
+
+        .product-image {
+            max-width: 300px;
+            max-height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container:hover .product-image {
+            transform: scale(1.1);
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            cursor: zoom-in;
+        }
+
+        .image-container:hover .overlay {
+            opacity: 1;
+        }
+
+        .zoom-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .zoom-modal img {
+                max-width: 90%;
+                max-height: 90%;
+            }
+
+            .zoom-modal.active {
+                display: flex;
+            }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        function zoomImage(element) {
+            var imgSrc = element.previousElementSibling.src;
+            var modal = document.createElement('div');
+            modal.className = 'zoom-modal active';
+            var img = document.createElement('img');
+            img.src = imgSrc;
+            modal.appendChild(img);
+            document.body.appendChild(modal);
+
+            modal.onclick = function() {
+                document.body.removeChild(modal);
+            };
+        }
+    </script>
+}
