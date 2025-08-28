@@ -1,0 +1,21 @@
+Harvard Anglia Style Reference List
+
+Microsoft Corporation (2023) ASP.NET Core 6.0. Available at: https://dotnet.microsoft.com/en-us/download/dotnet/6.0 (Accessed: 28 August 2025).
+
+Microsoft Corporation (2023) Azure SDK for .NET. Available at: https://docs.microsoft.com/en-us/dotnet/azure/ (Accessed: 28 August 2025).
+
+Microsoft Corporation (2023) Azure Table Storage. Available at: https://docs.microsoft.com/en-us/azure/storage/tables/ (Accessed: 28 August 2025).
+
+Microsoft Corporation (2023) Azure Blob Storage. Available at: https://docs.microsoft.com/en-us/azure/storage/blobs/ (Accessed: 28 August 2025).
+
+Microsoft Corporation (2023) Azure Queue Storage. Available at: https://docs.microsoft.com/en-us/azure/storage/queues/ (Accessed: 28 August 2025).
+
+Microsoft Corporation (2023) Azure Files. Available at: https://docs.microsoft.com/en-us/azure/storage/files/ (Accessed: 28 August 2025).
+
+jQuery Foundation (2023) jQuery 3.6.0. Available at: https://jquery.com/ (Accessed: 28 August 2025).
+
+jQuery Validation Plugin Team (2023) jQuery Validate 1.19.3. Available at: https://jqueryvalidation.org/ (Accessed: 28 August 2025).
+
+jQuery Validation Plugin Team (2023) jQuery Validate Unobtrusive 3.2.12. Available at: https://github.com/aspnet/jquery-validation-unobtrusive (Accessed: 28 August 2025).
+
+Bootstrap Contributors (2023) Bootstrap 4.5.2. Available at: https://getbootstrap.com/docs/4.5/getting-started/introduction/ (Accessed: 28 August 2025).
